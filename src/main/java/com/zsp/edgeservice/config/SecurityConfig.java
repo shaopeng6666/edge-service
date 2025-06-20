@@ -1,5 +1,7 @@
 package com.zsp.edgeservice.config;
 
+import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.client.web.server.WebSessionServerOAuth2AuthorizedClientRepository;
 import reactor.core.publisher.Mono;
 
 import org.springframework.context.annotation.Bean;
@@ -54,6 +56,11 @@ public class SecurityConfig {
             }));
             return chain.filter(exchange);
         };
+    }
+
+    @Bean
+    ServerOAuth2AuthorizedClientRepository authorizedClientRepository() {
+        return new WebSessionServerOAuth2AuthorizedClientRepository();
     }
 
 }
